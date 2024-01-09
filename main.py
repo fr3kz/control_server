@@ -1,36 +1,8 @@
-from fastapi import FastAPI
-import datetime
+import os
+import uvicorn
+from app import app
 
-from Message import MessageState
-
-
-
-app = FastAPI()
-Message = MessageState("la",1,str(datetime.datetime.now()))
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8080)
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/send/{mes}")
-async def send_message(mes:str):
-    message = mes.replace("_"," ")
-    # zebranie danych z requesta
-    Message.message = message
-    Message.time = str(datetime.datetime.now())
-    Message.power = 1
-
-    return {"message":"wyslano"}
-
-
-@app.get("/get")
-async def display():
-    context = {
-        "message": Message.message,
-        "time": Message.time,
-        "power": Message.power
-    }
-
-    return context
