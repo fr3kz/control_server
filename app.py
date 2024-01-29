@@ -28,7 +28,8 @@ async def display():
     context = {
         "message": Message.message,
         "time": Message.time,
-        "power": Message.power
+        "power": Message.power,
+        "distance": Message.distance
     }
 
     return context
