@@ -42,6 +42,11 @@ async def display_distance():
 
     return context
 
+@app.get("/setdistance/{dsc}")
+async def display_distance(dsc:int):
+    Message.distance = dsc
+
+    return {"message": "ustawiono"}
 @app.get("/emoi")
 async def display_emoi():
     context = {
@@ -49,3 +54,9 @@ async def display_emoi():
     }
 
     return context
+
+@app.get("/setemoi/{emi}")
+async def display_emoi(emi: int):
+    Message.power = emi
+
+    return {"message": "ustawiono"}
