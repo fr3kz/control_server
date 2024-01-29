@@ -4,7 +4,7 @@ import datetime
 from Message import MessageState
 
 app = FastAPI()
-Message = MessageState("", 1, str(datetime.datetime.now()))
+Message = MessageState("", 1, str(datetime.datetime.now()),20)
 
 
 @app.get("/")
@@ -29,6 +29,23 @@ async def display():
         "message": Message.message,
         "time": Message.time,
         "power": Message.power
+    }
+
+    return context
+
+
+@app.get("/distance")
+async def display_distance():
+    context = {
+        "message": Message.distance
+    }
+
+    return context
+
+@app.get("/emoi")
+async def display_emoi():
+    context = {
+        "message": Message.power
     }
 
     return context
