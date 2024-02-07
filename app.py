@@ -1,15 +1,18 @@
 from fastapi import FastAPI
 import datetime
 
+from starlette.templating import Jinja2Templates
+
 from Message import MessageState
 
 app = FastAPI()
 Message = MessageState("", 1, str(datetime.datetime.now()),20)
 
+templates = Jinja2Templates(directory="templates")
 
-@app.get("/")
+@app.get("/ami")
 async def root():
-    return {"message": "Hello World"}
+   return templates.TemplateResponse("index.html", {"request": "request"})
 
 
 @app.get("/send/{mes}")
