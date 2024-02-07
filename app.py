@@ -10,9 +10,11 @@ Message = MessageState("", 1, str(datetime.datetime.now()),20)
 
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/ami")
-async def root():
-   return templates.TemplateResponse("index.html", {"request": "request"})
+from fastapi import Request
+
+@app.get("/")
+async def root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/send/{mes}")
