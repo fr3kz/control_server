@@ -8,13 +8,8 @@ from Message import MessageState
 app = FastAPI()
 Message = MessageState("", 1, str(datetime.datetime.now()),20)
 
-templates = Jinja2Templates(directory="templates")
 
 from fastapi import Request
-
-@app.get("/")
-async def root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/send/{mes}")
